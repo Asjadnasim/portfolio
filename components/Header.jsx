@@ -11,11 +11,11 @@ import {
 import { gsap } from 'gsap';
 import React, { useRef, useState } from 'react';
 import { link } from '@/constant';
+import MobileNav from './MobileNav';
 
 const Header = () => {
 	const { scrollYProgress } = useScroll();
 	const [visible, setVisible] = useState(true);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	useMotionValueEvent(scrollYProgress, 'change', (currentprevious) => {
 		if (typeof current === 'number' && typeof previous === 'number') {
@@ -63,53 +63,46 @@ const Header = () => {
 					transition={{
 						duration: 0.2,
 					}}
-					className='fixed inset-x-0 top-0 z-50 w-[90%] mx-auto'
+					className=' inset-x-0 top-0 z-50 w-[90%] mx-auto'
 				>
 					<div className='flex justify-between items-center h-18 border-b-2 border-white px-2 py-4 '>
 						{/* Logo */}
 						<Link href='/'>
 							<div className='flex justify-between items-center mx-auto gap-2'>
 								<Image src={'/logo.png'} alt='Logo' width={56} height={56} />
-								<h1 className='text-4xl font-normal'>Nasim</h1>
+								<h1 className='text-4xl font-normal text-gradient'>Nasim</h1>
 							</div>
 						</Link>
 						{/* Navbar */}
-						<ul className='flex justify-between items-center gap-5'>
+						<ul className='hidden sm:flex justify-between items-center gap-5 text-center'>
 							{link.map((item, index) => (
 								<Link
 									href={item.href}
 									onMouseEnter={() => handleHover(index)}
 									onMouseLeave={() => handleHoverOut(index)}
-									className='relative hover:text-cyan-100 transition-all'
+									className='relative hover:text-gradient transition-all'
 									key={item.id}
 								>
 									<li>
 										{item.title}
 										<span
 											ref={borderRefs.current[index]}
-											className='absolute left-0 bottom-0 w-0 h-1 bg-cyan-200 transition-all mt-2 rounded-2xl'
+											className='absolute left-0 transition-all mt-2 rounded-2xl  inset-x-0 w-auto mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px'
 										></span>
 									</li>
 								</Link>
 							))}
 						</ul>
 
-						{isLoggedIn ? (
-							<Image
-								src={'/aot.jpg'}
-								alt='User Image'
-								width={42}
-								height={58}
-								className='rounded-full'
-							/>
-						) : (
-							<button className='border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full '>
-								<Link href='/login'>
-									<span>Login</span>
-									<span className='absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px' />
-								</Link>
-							</button>
-						)}
+						<button className='hidden sm:flex border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full text-gradient'>
+							<Link href='/#contact'>
+								<span>Contact</span>
+								<span className='absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px' />
+							</Link>
+						</button>
+
+						{/* Mobile Nav */}
+						<MobileNav />
 					</div>
 				</motion.div>
 			)}

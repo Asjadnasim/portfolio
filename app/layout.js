@@ -1,3 +1,4 @@
+import Header from '@/components/Header';
 import './globals.css';
 import { ThemeProvider } from './provider';
 
@@ -9,13 +10,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
-			<body>
+			<body className='bg-gradient-typewriter'>
 				<ThemeProvider
 					attribute='class'
 					defaultTheme='dark'
 					enableSystem
 					disableTransitionOnChange
 				>
+					<Header />
 					{children}
 				</ThemeProvider>
 			</body>
