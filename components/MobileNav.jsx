@@ -50,26 +50,26 @@ const MobileNav = () => {
 	};
 
 	return (
-		<div className='sm:hidden flex flex-col items-center gap-5 text-center'>
+		<div className='sm:hidden flex flex-col items-center gap-5 text-center h-full'>
 			<div onClick={toggleMenu}>
 				<RxHamburgerMenu />
 			</div>
 
 			<div
 				ref={menuRef}
-				className={`fixed top-0 left-0 w-full h-full bg-gray-900 z-50 flex flex-col items-center justify-center gap-10 transform ${
+				className={`absolute top-[100%] left-0  w-[100vw] h-[100vh] bg-gradient-typewriter z-50 flex flex-col items-center justify-center gap-10 transform ${
 					isOpen ? 'translate-x-0' : 'translate-x-full'
 				}`}
 				style={{ display: isOpen ? 'flex' : 'none' }}
 			>
-				<ul className='flex flex-col items-center gap-5'>
+				<ul className='flex flex-col items-center gap-20'>
 					{link2.map((item, index) => (
 						<li key={item.id}>
 							<Link
 								href={item.href}
 								onMouseEnter={() => handleHover(index)}
 								onMouseLeave={() => handleHoverOut(index)}
-								className='hover:text-gradient transition-all text-xl font-extralight'
+								className='font-thin hover:text-purple-200 transition-all text-xl uppercase'
 								onClick={() => setIsOpen(false)}
 							>
 								{item.title}
